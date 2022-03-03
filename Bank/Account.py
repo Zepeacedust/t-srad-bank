@@ -16,6 +16,9 @@ class Account:
         float_amount = float(amount)
         self.amount -= float_amount
         recipient.amount += float_amount
+
+    def __str__(self) -> str:
+        return str(self.number).zfill(6)
     @classmethod
     def reset(cls):
         Account.numberOfAccounts = 0

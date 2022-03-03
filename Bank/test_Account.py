@@ -96,3 +96,21 @@ def test_invalid_nonfloat_amount():
         donor = Account(100)
         recipient = Account(0)
         donor.transfer(recipient, "1sadfh0fjgh0dsfgjh.0")
+
+## step 6
+
+def test_small_account_nr_str():
+    account = Account()
+    assert str(account) == "000001"
+    
+def test_medium_account_nr_str():
+    account = Account()
+    account.number = 50401
+    assert str(account) == "050401"
+
+def test_large_account_nr_str():
+    account = Account()
+    account.number = 40163423
+    assert str(account) == "40163423"
+
+### neikvæð account number er undefined behavior, ef það gerist yfir höfuð, man ekki hvort python overflowar eða crashar bara
