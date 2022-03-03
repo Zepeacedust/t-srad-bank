@@ -142,3 +142,16 @@ def test_overtransfer():
     recipient = Account(100)
     with pytest.raises(IllegalTransfer):
         donor.transfer(recipient,101)
+
+## step 10
+def test_total_balance():
+    accounts = [Account(1),Account(2),Account(4),Account(8),Account(16)]
+    assert Account.total_balance() == 31.0
+
+def test_invalid_account_creation_affecting_total():
+    accounts = [Account(1),Account(2),Account(4),Account(8),Account(16)]
+    try:
+        a = Account("invalid entry")
+    except:
+        pass
+    assert  Account.total_balance() == 31.0

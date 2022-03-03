@@ -8,7 +8,7 @@ class IllegalTransfer(Exception):
 
 class Account:
     numberOfAccounts = 0
-    
+    accounts = []
     def __init__(self, amount = 0):
         float_amount = float(amount)
         if float_amount < 0:
@@ -18,6 +18,7 @@ class Account:
         
         Account.numberOfAccounts += 1
         self.number = Account.numberOfAccounts
+        Account.accounts.append(self)
     
     def withdraw(self, amount):
         remaining = self.amount - float(amount)
@@ -40,3 +41,7 @@ class Account:
     @classmethod
     def reset(cls):
         Account.numberOfAccounts = 0
+        Account.accounts = []
+
+    def total_balance():
+        return sum([account.amount for account in Account.accounts])
