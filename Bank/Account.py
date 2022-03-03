@@ -9,6 +9,9 @@ class Account:
     def withdraw(self, amount):
         self.amount -= float(amount)
     
+    def deposit(self, amount):
+        self.amount += float(amount)
+    
     @classmethod
     def reset(cls):
         Account.numberOfAccounts = 0

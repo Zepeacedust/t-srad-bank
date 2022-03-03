@@ -49,3 +49,19 @@ def test_invalid_nonfloat_withdraw():
     account = Account("100.0")
     with pytest.raises(ValueError):
         account.withdraw("9asdf9.0")
+
+## step 4
+def test_regular_deposit():
+    account = Account(100.0)
+    account.deposit(99.0)
+    assert account.amount == 100.0 + 99.0
+
+def test_valid_nonfloat_deposit():
+    account = Account("100.0")
+    account.deposit("99.0")
+    assert account.amount == 100.0 + 99.0
+
+def test_invalid_nonfloat_deposit():
+    account = Account("100.0")
+    with pytest.raises(ValueError):
+        account.deposit("9asdf9.0")
