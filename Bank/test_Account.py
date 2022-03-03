@@ -1,5 +1,5 @@
 import pytest
-from .Account import Account
+from .Account import Account, NegativeBalanceNotAllowed
 
 @pytest.fixture(autouse=True)
 def run_around_tests():
@@ -32,7 +32,7 @@ def test_valid_nonfloat_inital_amount():
     
 def test_invalid_nonfloat_inital_amount():
     with pytest.raises(ValueError):
-        account = Account("937a23h7.0")
+        Account("937a23h7.0")
     
 ## step 3
 def test_regular_withdraw():
@@ -114,3 +114,12 @@ def test_large_account_nr_str():
     assert str(account) == "40163423"
 
 ### neikvæð account number er undefined behavior, ef það gerist yfir höfuð, man ekki hvort python overflowar eða crashar bara
+
+## step 7
+def test_negative_initial_amounts():
+    with pytest.raises(NegativeBalanceNotAllowed):
+        Account(-7)
+
+def test_zero_initial_amounts():
+    account = Account(0)
+    assert account.amount == 0.0

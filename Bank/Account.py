@@ -1,10 +1,18 @@
+class NegativeBalanceNotAllowed (Exception):
+    pass
+
 class Account:
     numberOfAccounts = 0
     
     def __init__(self, amount = 0):
+        float_amount = float(amount)
+        if float_amount < 0:
+            raise NegativeBalanceNotAllowed 
+        self.amount = float_amount
+        
+        
         Account.numberOfAccounts += 1
         self.number = Account.numberOfAccounts
-        self.amount = float(amount)    
     
     def withdraw(self, amount):
         self.amount -= float(amount)
