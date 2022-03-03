@@ -3,7 +3,8 @@ class NegativeBalanceNotAllowed (Exception):
 
 class IllegalWithdrawal (Exception):
     pass
-
+class IllegalTransfer(Exception):
+    pass
 
 class Account:
     numberOfAccounts = 0
@@ -29,6 +30,8 @@ class Account:
     
     def transfer(self, recipient, amount):
         float_amount = float(amount)
+        if self.amount - float_amount < 0:
+            raise IllegalTransfer
         self.amount -= float_amount
         recipient.amount += float_amount
 
