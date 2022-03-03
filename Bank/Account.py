@@ -12,6 +12,10 @@ class Account:
     def deposit(self, amount):
         self.amount += float(amount)
     
+    def transfer(self, recipient, amount):
+        float_amount = float(amount)
+        self.amount -= float_amount
+        recipient.amount += float_amount
     @classmethod
     def reset(cls):
         Account.numberOfAccounts = 0

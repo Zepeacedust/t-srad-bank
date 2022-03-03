@@ -65,3 +65,34 @@ def test_invalid_nonfloat_deposit():
     account = Account("100.0")
     with pytest.raises(ValueError):
         account.deposit("9asdf9.0")
+
+## step 5
+def test_transfer_keeps_total():
+    donor = Account(100)
+    recipient = Account(0)
+    donor.transfer(recipient, 100.0)
+    assert donor.amount + recipient.amount == 100.0
+
+def test_tranfer_reduces_donor():
+    donor = Account(100)
+    recipient = Account(0)
+    donor.transfer(recipient, 100.0)
+    assert donor.amount == 0.0
+
+def test_tranfer_increases_recipient():
+    donor = Account(100)
+    recipient = Account(0)
+    donor.transfer(recipient, 100.0)
+    assert recipient.amount == 100.0
+
+def test_valid_nonfloat_amount():
+    donor = Account(100)
+    recipient = Account(0)
+    donor.transfer(recipient, "100.0")
+    assert donor.amount + recipient.amount == 100.0
+
+def test_invalid_nonfloat_amount():
+    with pytest.raises(ValueError):
+        donor = Account(100)
+        recipient = Account(0)
+        donor.transfer(recipient, "1sadfh0fjgh0dsfgjh.0")
