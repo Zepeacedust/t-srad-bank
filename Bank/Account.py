@@ -4,12 +4,10 @@ class Account:
     def __init__(self, amount = 0):
         Account.numberOfAccounts += 1
         self.number = Account.numberOfAccounts
-        #if given invalid value, use 0
-        try:
-            self.amount = float(amount)
-        except ValueError:
-            self.amount = 0
-            
+        self.amount = float(amount)    
+    
+    def withdraw(self, amount):
+        self.amount -= float(amount)
     
     @classmethod
     def reset(cls):
