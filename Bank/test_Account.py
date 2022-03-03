@@ -1,5 +1,5 @@
 import pytest
-from .Account import Account, NegativeBalanceNotAllowed
+from .Account import Account, NegativeBalanceNotAllowed, IllegalWithdrawal
 
 @pytest.fixture(autouse=True)
 def run_around_tests():
@@ -122,4 +122,16 @@ def test_negative_initial_amounts():
 
 def test_zero_initial_amounts():
     account = Account(0)
+    assert account.amount == 0.0
+    
+## step 8
+
+def test_overdraft():
+    account = Account(100)
+    with pytest.raises(IllegalWithdrawal):
+        account.withdraw(101)
+
+def test_withdraw_entire_account():
+    account = Account(100)
+    account.withdraw(100)
     assert account.amount == 0.0

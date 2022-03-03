@@ -1,6 +1,10 @@
 class NegativeBalanceNotAllowed (Exception):
     pass
 
+class IllegalWithdrawal (Exception):
+    pass
+
+
 class Account:
     numberOfAccounts = 0
     
@@ -15,7 +19,10 @@ class Account:
         self.number = Account.numberOfAccounts
     
     def withdraw(self, amount):
-        self.amount -= float(amount)
+        remaining = self.amount - float(amount)
+        if remaining < 0:
+            raise IllegalWithdrawal
+        self.amount = remaining
     
     def deposit(self, amount):
         self.amount += float(amount)
